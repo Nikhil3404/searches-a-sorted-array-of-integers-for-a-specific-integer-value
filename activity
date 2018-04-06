@@ -1,0 +1,26 @@
+package recursionPuzzles;
+import java.util.Arrays;
+public class SearchingSortedInt {
+    private static int data[] = {2,5,45,89,123,450,4,6,7,9,99};
+    
+    public static int iterativeBinarySearch (int d[], int g) {        
+         Arrays.sort(data);         
+        int left = 0; 
+        int middle = (d.length-1)/2;
+        int right = d.length-1;
+        
+        while (d[middle] != g && left <= right) {
+            if (d[middle] > g) right = middle-1;
+            else left = middle+1;
+            middle = (left + right)/2;
+        }
+        if (d[middle] == g) return middle;
+        else return -1;
+    }
+    public static void main (String [] args) {
+        int goal = 450;
+        int result = iterativeBinarySearch(data, goal);
+        if (result < 0) System.out.println("The specified value could not be find: " + goal);
+        else System.out.println("The index of the value" + goal + " was found at: " + result);
+    }
+}    
